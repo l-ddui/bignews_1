@@ -55,8 +55,8 @@ router.post('/login', (req, res) => {
         }
         if (result.length > 0) {
             // 生成token
-            const tokenStr = jwt.sign({ name: username }, 'l-ddui', { expiresIn: 20 })
-            const token = 'Bearer  ' + tokenStr
+            const tokenStr = jwt.sign({ name: username }, 'l-ddui', { expiresIn: 2 * 60 * 60 })
+            const token = 'Bearer ' + tokenStr
             res.json({ "status": 0, "message": "登录成功！", token })
         } else {
             res.json({ "status": 1, "message": "用户名或密码出错" })

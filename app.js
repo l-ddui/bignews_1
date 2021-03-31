@@ -2,7 +2,7 @@
 const express = require('express')
 const server = express()
 server.listen(10086, function () {
-    console.log('服务器已启动');
+    console.log('服务器已启动11');
 
 })
 
