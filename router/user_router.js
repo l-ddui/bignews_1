@@ -48,21 +48,7 @@ router.get('/userinfo', (req, res) => {
 router.post('/userinfo', (req, res) => {
     // 获取参数
     const { id, nickname, email, userPic } = req.body
-
-    let condition = []
-    if (nickname) {
-        condition.push(`nickname = "${nickname}"`)
-    }
-    if (email) {
-        condition.push(`email = "${email}"`)
-    }
-    if (userPic) {
-        condition.push(`userPic = "${userPic}"`)
-    }
-    // console.log(condition);
-    let conditionStr = condition.join()
-    // console.log(conditionStr);
-    const sqlStr = `update users set ${conditionStr} where id=${id}`
+    const sqlStr = `update users set nickname="${nickname}",email="${email}",userPic="${userPic}"  where id=${id}`
     // console.log(sqlStr);
     conn.query(sqlStr, (err, result) => {
         // console.log(err);
