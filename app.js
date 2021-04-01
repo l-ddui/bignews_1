@@ -2,7 +2,7 @@
 const express = require('express')
 const server = express()
 server.listen(10086, function () {
-    console.log('服务器已启动11');
+    console.log('服务器已启动');
 
 })
 
@@ -23,14 +23,16 @@ server.use(jwt({
     secret: 'l-ddui', // 生成token时的 钥匙，必须统一
     algorithms: ['HS256'] // 必填，加密算法，无需了解
 }).unless({
-    path: ['/api/login', '/api/reguser', /^\/uploads\/.*/] // 除了这两个接口，其他都需要认证
+    path: ['/api/login', '/api/reguser', /^\/uploads\/.*/, /^\/index\/.*/] // 除了这两个接口，其他都需要认证
 }));
 
 // 注册路由
 const accountRouter = require('./router/account_router.js')
 const userRouter = require('./router/user_router.js')
-const articleRouter = require('./router/ariticle_router.js')
-server.use('/my/article/', articleRouter)
+const articleRouter = require('./router/article_router.js')
+const indexRouter = require('./router/index_router.js')
+server.use('/index', indexRouter)
+server.use('/my/article', articleRouter)
 server.use('/api', accountRouter)
 server.use('/my', userRouter)
 
